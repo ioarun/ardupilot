@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ros:humble
 WORKDIR /ardupilot
 
 ARG DEBIAN_FRONTEND=noninteractive
@@ -51,6 +51,9 @@ ENV BUILDLOGS=/tmp/buildlogs
 # Cleanup
 RUN sudo apt-get clean \
     && sudo rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# Install mavros
+RUN sudo apt-get install ros-humble-mavros
 
 ENV CCACHE_MAXSIZE=1G
 ENTRYPOINT ["/ardupilot_entrypoint.sh"]
